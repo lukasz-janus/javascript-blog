@@ -51,6 +51,8 @@
     optTitleListSelector = '.titles';
 
 
+    
+  // eslint-disable-next-line no-inner-declarations
   function generateTitleLinks(){
     console.log('Run function generateTitleLinks');
 
@@ -72,22 +74,25 @@
     for(let article of articles){
 
       /* [DONE] get the article id */
-      const articleId = articles.getAttribute('id');
+      const articleId = article.getAttribute('id');
       console.log(articleId);
 
       /* [DONE] find the title element */
       const articleTitle = article.querySelector(optTitleSelector).innerHTML;
       
       /* [DONE] get the title from the title element */
+      console.log(articleTitle.innerHTML);
 
       /* [DONE] create HTML of the link */
       const linkHTML = '<li><a href="#' + articleId + '"><span>' + article.innerHTML + '</span></a></li>';
       console.log(linkHTML);
 
       /* [IN PROGRESS] insert link into titleList */
-      console.log(html);
-      html = html + linkHTML;
+      
+      html = html + linkHTML; 
     } 
+     
   } 
+  
 generateTitleLinks();
 }
