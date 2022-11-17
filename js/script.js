@@ -37,21 +37,12 @@
       /* [DONE] add class 'active' to the correct article */
       selectedArticle.classList.add('active');
       console.log(selectedArticle);
-    }
-    
-    const links = document.querySelectorAll('.titles a');
-    
-    for(let link of links){
-      link.addEventListener('click', titleClickHandler);
-    }
-
+    } 
   
   const optArticleSelector = '.post',
     optTitleSelector = '.post-title',
     optTitleListSelector = '.titles';
 
-
-    
   // eslint-disable-next-line no-inner-declarations
   function generateTitleLinks(){
     console.log('Run function generateTitleLinks');
@@ -81,17 +72,24 @@
       const articleTitle = article.querySelector(optTitleSelector).innerHTML;
       
       /* [DONE] get the title from the title element */
-      console.log(articleTitle.innerHTML);
+      console.log(articleTitle);
 
       /* [DONE] create HTML of the link */
-      const linkHTML = '<li><a href="#' + articleId + '"><span>' + article.innerHTML + '</span></a></li>';
+      const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
       console.log(linkHTML);
 
-      /* [IN PROGRESS] insert link into titleList */
-      
-      html = html + linkHTML; 
-    } 
-     
+      /* [DONE] insert link into titleList */
+      html = html + linkHTML;
+    }
+
+    titleList.innerHTML = html;
+
+    const links = document.querySelectorAll('.titles a');
+    console.log(links);
+    
+    for(let link of links){
+      link.addEventListener('click', titleClickHandler);
+    }
   } 
   
 generateTitleLinks();
