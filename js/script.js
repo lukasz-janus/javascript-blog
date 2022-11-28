@@ -1,6 +1,18 @@
 'use strict';
 
 {
+  const opts = {
+    articleSelector: '.post',
+    titleSelector: '.post-title',
+    titleListSelector: '.titles',
+    articleTagsSelector: '.post-tags .list',
+    articleAuthorSelector: '.post-author',
+    tagsListSelector: '.tags.list',
+    cloudClassCount: '5',
+    cloudClassPrefix: 'tag-size-',
+    authorsListSelector: '.authors.list'
+  };
+
   const titleClickHandler = function(event){
       event.preventDefault();
       const clickedElement = this;
@@ -37,26 +49,14 @@
       /* [DONE] add class 'active' to the correct article */
       selectedArticle.classList.add('active');
       console.log(selectedArticle);
-    }  
-
-
-  const optArticleSelector = '.post',
-    optTitleSelector = '.post-title',
-    optTitleListSelector = '.titles',
-    optArticleTagsSelector = '.post-tags .list',
-    optArticleAuthorSelector = '.post-author',
-    optTagsListSelector = '.tags.list',
-    optCloudClassCount = '5',
-    optCloudClassPrefix = 'tag-size-',
-    optAuthorsListSelector = '.authors.list';
-
+    }
 
   // eslint-disable-next-line no-inner-declarations
   function generateTitleLinks(customSelector = ''){
     console.log('Run function generateTitleLinks');
 
     /* [DONE] remove contents of titleList */
-    const titleList = document.querySelector(optTitleListSelector);
+    const titleList = document.querySelector(opts.titleListSelector);
     titleList.innerHTML = '';
 
     const liTags = document.querySelectorAll('.titles li');
@@ -65,7 +65,7 @@
     }
 
     /* [DONE] for each article */
-    const articles = document.querySelectorAll(optArticleSelector + customSelector);
+    const articles = document.querySelectorAll(opts.articleSelector + customSelector);
     console.log(articles);
 
     let html ='';
@@ -77,7 +77,7 @@
       console.log(articleId);
 
       /* [DONE] find the title element */
-      const articleTitle = article.querySelector(optTitleSelector).innerHTML;
+      const articleTitle = article.querySelector(opts.titleSelector).innerHTML;
       
       /* [DONE] get the title from the title element */
       console.log(articleTitle);
@@ -102,7 +102,6 @@
   
   generateTitleLinks();
 
-
   // eslint-disable-next-line no-inner-declarations
   function calculateTagsParams(tags){
     const params = {max: 0, min: 999999};
@@ -125,8 +124,8 @@
     const normalizedCount = count - params.min;
     const normalizedMax = params.max - params.min;
     const percentage = normalizedCount / normalizedMax;
-    const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1 );
-    return optCloudClassPrefix + classNumber;
+    const classNumber = Math.floor( percentage * (opts.cloudClassCount - 1) + 1 );
+    return opts.cloudClassPrefix + classNumber;
   }
 
   // eslint-disable-next-line no-inner-declarations
@@ -136,14 +135,14 @@
     let allTags = {};
 
     /* [DONE] find all articles */
-    const articles = document.querySelectorAll(optArticleSelector);
+    const articles = document.querySelectorAll(opts.articleSelector);
     console.log(articles);
 
     /* [DONE] START LOOP: for every article: */
     for(let article of articles){
 
       /* [DONE] find tags wrapper */
-      const wrapper = article.querySelector(optArticleTagsSelector);
+      const wrapper = article.querySelector(opts.articleTagsSelector);
 
       /* [DONE] make html variable with empty string */
       let html ='';
@@ -174,7 +173,6 @@
         } else {
           allTags[tag]++;
         }
-
       } /* [DONE] END LOOP: for each tag */
 
       /* insert HTML of all the links into the tags wrapper */
@@ -183,7 +181,7 @@
     } /* END LOOP: for every article: */
 
     /* [NEW] find list of tags in right column */
-    const tagList = document.querySelector(optTagsListSelector);
+    const tagList = document.querySelector(opts.tagsListSelector);
 
     const tagsParams = calculateTagsParams(allTags);
     console.log('tagsParams:', tagsParams);
@@ -282,14 +280,14 @@
     let allAuthors = {};
 
     /* [DONE] find all articles */
-    const articles = document.querySelectorAll(optArticleSelector);
+    const articles = document.querySelectorAll(opts.articleSelector);
     console.log(articles);
 
     /* [DONE] START LOOP: for every article: */
     for(let article of articles){
 
       /* [DONE] find author wrapper */
-      const wrapper = article.querySelector(optArticleAuthorSelector);
+      const wrapper = article.querySelector(opts.articleAuthorSelector);
 
       /* [DONE] make html variable with empty string */
       let html ='';
@@ -319,7 +317,7 @@
     } /* END LOOP: for every article: */
 
     /* [NEW] find list of tags in right column */
-    const authorList = document.querySelector(optAuthorsListSelector);
+    const authorList = document.querySelector(opts.authorsListSelector);
 
     /* [NEW] create variable for all links HTML code */
     let allAuthorsHTML = '';
@@ -332,7 +330,6 @@
 
     /*[NEW] add HTML from allAuthorsHTML to List */
     authorList.innerHTML = allAuthorsHTML;
- 
   }
 
   generateAuthors();
