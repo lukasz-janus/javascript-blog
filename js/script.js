@@ -1,5 +1,9 @@
 'use strict';
 
+const templates = {
+  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML)
+}
+
 {
   const opts = {
     articleSelector: '.post',
@@ -12,11 +16,6 @@
     cloudClassPrefix: 'tag-size-',
     authorsListSelector: '.authors.list'
   };
-
-
-
-
-
 
   const titleClickHandler = function(event){
       event.preventDefault();
@@ -56,15 +55,6 @@
       console.log(selectedArticle);
     }
 
-
-
-
-
-
-
-
-
-
   // eslint-disable-next-line no-inner-declarations
   function generateTitleLinks(customSelector = ''){
     console.log('Run function generateTitleLinks');
@@ -97,7 +87,9 @@
       console.log(articleTitle);
 
       /* [DONE] create HTML of the link */
-      const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+      // const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+      const linkHTMLData = {id: articleId, title: articleTitle};
+      const linkHTML = templates.articleLink(linkHTMLData);
       console.log(linkHTML);
 
       /* [DONE] insert link into titleList */
@@ -114,19 +106,7 @@
     }
   } 
 
-
-
-
-
-  
   generateTitleLinks();
-
-
-
-
-
-
-
 
   // eslint-disable-next-line no-inner-declarations
   function calculateTagsParams(tags){
@@ -144,10 +124,6 @@
     return params;
   }
 
-
-
-
-
 // eslint-disable-next-line no-inner-declarations
   function calculateTagClass(count, params){
 
@@ -157,12 +133,6 @@
     const classNumber = Math.floor( percentage * (opts.cloudClassCount - 1) + 1 );
     return opts.cloudClassPrefix + classNumber;
   }
-
-
-
-
-
-
 
   // eslint-disable-next-line no-inner-declarations
   function generateTags(){
@@ -242,16 +212,7 @@
     tagList.innerHTML = allTagsHTML;
   }
 
-
-
-
-
   generateTags();
-
-
-
-
-
 
   // eslint-disable-next-line no-inner-declarations
   function tagClickHandler(event){
@@ -315,18 +276,7 @@
     } /* END LOOP: for each link */
   }
 
-
-
-
-
-  
   addClickListenersToTags();
-
-
-
-
-
-
 
   // eslint-disable-next-line no-inner-declarations
   function generateAuthors(){
@@ -387,16 +337,7 @@
     authorList.innerHTML = allAuthorsHTML;
   }
 
-
-
-
-
   generateAuthors();
-
-
-
-
-
   
   // eslint-disable-next-line no-inner-declarations
   function authorClickHandler(event){
