@@ -1,7 +1,8 @@
 'use strict';
 
 const templates = {
-  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML)
+  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+  tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML)
 }
 
 {
@@ -165,7 +166,9 @@ const templates = {
       for(let tag of articleTagsArray){
 
         /* [DONE] generate HTML of the link */
-        const linkHTML = '<li><a href="#tag-' + tag + '"><span>' + tag + '</span></a></li>, ';
+        // const linkHTML = '<li><a href="#tag-' + tag + '"><span>' + tag + '</span></a></li>, ';
+        const linkHTMLData = {tag: tag};
+        const linkHTML = templates.tagLink(linkHTMLData);
         console.log(linkHTML);
 
         /* [DONE] add generated code to html variable */
