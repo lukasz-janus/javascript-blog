@@ -13,6 +13,11 @@
     authorsListSelector: '.authors.list'
   };
 
+
+
+
+
+
   const titleClickHandler = function(event){
       event.preventDefault();
       const clickedElement = this;
@@ -50,6 +55,15 @@
       selectedArticle.classList.add('active');
       console.log(selectedArticle);
     }
+
+
+
+
+
+
+
+
+
 
   // eslint-disable-next-line no-inner-declarations
   function generateTitleLinks(customSelector = ''){
@@ -99,8 +113,20 @@
       link.addEventListener('click', titleClickHandler);
     }
   } 
+
+
+
+
+
   
   generateTitleLinks();
+
+
+
+
+
+
+
 
   // eslint-disable-next-line no-inner-declarations
   function calculateTagsParams(tags){
@@ -118,6 +144,10 @@
     return params;
   }
 
+
+
+
+
 // eslint-disable-next-line no-inner-declarations
   function calculateTagClass(count, params){
 
@@ -127,6 +157,12 @@
     const classNumber = Math.floor( percentage * (opts.cloudClassCount - 1) + 1 );
     return opts.cloudClassPrefix + classNumber;
   }
+
+
+
+
+
+
 
   // eslint-disable-next-line no-inner-declarations
   function generateTags(){
@@ -206,7 +242,16 @@
     tagList.innerHTML = allTagsHTML;
   }
 
+
+
+
+
   generateTags();
+
+
+
+
+
 
   // eslint-disable-next-line no-inner-declarations
   function tagClickHandler(event){
@@ -259,7 +304,7 @@
   function addClickListenersToTags(){
 
     /* find all links to tags */
-    const tagLinks = document.querySelectorAll('.list-horizontal a');
+    const tagLinks = document.querySelectorAll('a[href^="#tag-"]');
     console.log(tagLinks);
 
     /* START LOOP: for each link */
@@ -267,11 +312,21 @@
 
       /* add tagClickHandler as event listener for that link */
       tagLink.addEventListener('click', tagClickHandler);
-
     } /* END LOOP: for each link */
   }
+
+
+
+
+
   
   addClickListenersToTags();
+
+
+
+
+
+
 
   // eslint-disable-next-line no-inner-declarations
   function generateAuthors(){
@@ -324,7 +379,7 @@
     /* [NEW] START LOOP: for each author in allAuthors: */
     for(let author in allAuthors){
     /* [NEW] generate code of a link and add it to allAuthorsHTML */
-    allAuthorsHTML += '<li><a href="#author-'+ author + ' ">' + author + '(' + allAuthors[author] + ')</a></li>';
+    allAuthorsHTML += '<li><a href="#author-'+ author + '">' + author + '</a>(' + allAuthors[author] + ')</li>';
     }
     /* [NEW] END LOOP: for each tag in allAuthors: */
 
@@ -332,10 +387,20 @@
     authorList.innerHTML = allAuthorsHTML;
   }
 
+
+
+
+
   generateAuthors();
 
+
+
+
+
+  
   // eslint-disable-next-line no-inner-declarations
   function authorClickHandler(event){
+    console.log('Funkcja authorClickHandler uruchomiona!');
 
     /* prevent default action for this event */
     event.preventDefault();
@@ -385,13 +450,13 @@
   function addClickListenersToAuthors(){
 
     /* find all links to author */
-    const authorLinks = document.querySelectorAll('.post-author a');
+    const authorLinks = document.querySelectorAll('a[href^="#author-"]');
     console.log(authorLinks);
   
     /* START LOOP: for each link */
     for(let authorLink of authorLinks){
   
-      /* add tagClickHandler as event listener for that link */
+      /* add authorClickHandler as event listener for that link */
       authorLink.addEventListener('click', authorClickHandler);
   
     } /* END LOOP: for each link */
