@@ -2,7 +2,8 @@
 
 const templates = {
   articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
-  tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML)
+  tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
+  authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML)
 }
 
 {
@@ -305,7 +306,9 @@ const templates = {
       console.log(articleAuthor);
 
       /* [DONE] generate HTML of the link */
-      const linkHTML = '<li><a href="#author-' + articleAuthor + '"><span>' + articleAuthor  + '</span></a></li>';
+      // const linkHTML = '<li><a href="#author-' + articleAuthor + '"><span>' + articleAuthor  + '</span></a></li>';
+      const linkHTMLData = {author: articleAuthor};
+      const linkHTML = templates.authorLink(linkHTMLData);
       console.log(linkHTML);
 
       /* [DONE] add generated code to html variable */
