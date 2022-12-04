@@ -17,5 +17,7 @@ module.exports = {
         "react"
     ],
     "rules": {
+        "no-inner-declarations": ["off"],
+        "Handlebars": false
     }
 }

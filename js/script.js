@@ -22,55 +22,48 @@ const templates = {
   };
 
   const titleClickHandler = function(event){
-      event.preventDefault();
-      const clickedElement = this;
-      console.log('Link was clicked!');
-      console.log(event);
+    event.preventDefault();
+    const clickedElement = this;
+    console.log('Link was clicked!');
+    console.log(event);
     
-      /* [DONE] remove class 'active' from all article links  */
-      const activeLinks = document.querySelectorAll('.titles a.active');
+    /* [DONE] remove class 'active' from all article links  */
+    const activeLinks = document.querySelectorAll('.titles a.active');
 
-      for(let activeLink of activeLinks){
-          activeLink.classList.remove('active');
-      }
-    
-      /* [DONE] add class 'active' to the clicked link */
-      console.log('clickedElement:', clickedElement);
-
-      clickedElement.classList.add('active');
-
-      /* [DONE] remove class 'active' from all articles */
-      const activeArticles = document.querySelectorAll('.posts article.active');
-
-      for(let activeArticle of activeArticles){
-          activeArticle.classList.remove('active');
-      }
-    
-      /* [DONE] get 'href' attribute from the clicked link */
-      const clickedLink = clickedElement.getAttribute('href');
-      console.log(clickedLink);
-    
-      /* [DONE] find the correct article using the selector (value of 'href' attribute) */
-      const selectedArticle = document.querySelector(clickedLink);
-      console.log(selectedArticle);
-    
-      /* [DONE] add class 'active' to the correct article */
-      selectedArticle.classList.add('active');
-      console.log(selectedArticle);
+    for(let activeLink of activeLinks){
+      activeLink.classList.remove('active');
     }
+    
+    /* [DONE] add class 'active' to the clicked link */
+    console.log('clickedElement:', clickedElement);
+    clickedElement.classList.add('active');
 
-  // eslint-disable-next-line no-inner-declarations
+    /* [DONE] remove class 'active' from all articles */
+    const activeArticles = document.querySelectorAll('.posts article.active');
+
+    for(let activeArticle of activeArticles){
+      activeArticle.classList.remove('active');
+    }
+    
+    /* [DONE] get 'href' attribute from the clicked link */
+    const clickedLink = clickedElement.getAttribute('href');
+    console.log(clickedLink);
+    
+    /* [DONE] find the correct article using the selector (value of 'href' attribute) */
+    const selectedArticle = document.querySelector(clickedLink);
+    console.log(selectedArticle);
+    
+    /* [DONE] add class 'active' to the correct article */
+    selectedArticle.classList.add('active');
+    console.log(selectedArticle);
+  }
+
   function generateTitleLinks(customSelector = ''){
     console.log('Run function generateTitleLinks');
 
     /* [DONE] remove contents of titleList */
     const titleList = document.querySelector(opts.titleListSelector);
     titleList.innerHTML = '';
-
-    const liTags = document.querySelectorAll('.titles li');
-    for(let li of liTags){
-      li.style.display="none";
-    }
 
     /* [DONE] for each article */
     const articles = document.querySelectorAll(opts.articleSelector + customSelector);
@@ -91,7 +84,6 @@ const templates = {
       console.log(articleTitle);
 
       /* [DONE] create HTML of the link */
-      // const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
       const linkHTMLData = {id: articleId, title: articleTitle};
       const linkHTML = templates.articleLink(linkHTMLData);
       console.log(linkHTML);
@@ -112,7 +104,6 @@ const templates = {
 
   generateTitleLinks();
 
-  // eslint-disable-next-line no-inner-declarations
   function calculateTagsParams(tags){
     const params = {max: 0, min: 999999};
 
@@ -128,9 +119,7 @@ const templates = {
     return params;
   }
 
-// eslint-disable-next-line no-inner-declarations
   function calculateTagClass(count, params){
-
     const normalizedCount = count - params.min;
     const normalizedMax = params.max - params.min;
     const percentage = normalizedCount / normalizedMax;
@@ -138,7 +127,6 @@ const templates = {
     return opts.cloudClassPrefix + classNumber;
   }
 
-  // eslint-disable-next-line no-inner-declarations
   function generateTags(){
 
     /* [NEW] create a new variable allTags with an empty object */
@@ -169,8 +157,8 @@ const templates = {
       for(let tag of articleTagsArray){
 
         /* [DONE] generate HTML of the link */
-        // const linkHTML = '<li><a href="#tag-' + tag + '"><span>' + tag + '</span></a></li>, ';
         const linkHTMLData = {tag: tag};
+
         const linkHTML = templates.tagLink(linkHTMLData);
         console.log(linkHTML);
 
@@ -205,7 +193,6 @@ const templates = {
     for(let tag in allTags){
 
       /* [NEW] generate code of a link and add it to allTagsHTML */
-    
       const tagLinkHTML = '<li><a class="' + calculateTagClass(allTags[tag], tagsParams) + '" href="#tag-' + tag + '">' + tag + '</a> </li>';
       console.log('tagLinkHTML:', tagLinkHTML);
 
@@ -224,7 +211,6 @@ const templates = {
 
   generateTags();
 
-  // eslint-disable-next-line no-inner-declarations
   function tagClickHandler(event){
 
     /* prevent default action for this event */
@@ -271,7 +257,6 @@ const templates = {
     generateTitleLinks('[data-tags~="' + tag + '"]');
   }
 
-  // eslint-disable-next-line no-inner-declarations
   function addClickListenersToTags(){
 
     /* find all links to tags */
@@ -288,7 +273,6 @@ const templates = {
 
   addClickListenersToTags();
 
-  // eslint-disable-next-line no-inner-declarations
   function generateAuthors(){
 
     /* [NEW] create a new variable allAuthors with an empty array */
@@ -312,7 +296,6 @@ const templates = {
       console.log(articleAuthor);
 
       /* [DONE] generate HTML of the link */
-      // const linkHTML = '<li><a href="#author-' + articleAuthor + '"><span>' + articleAuthor  + '</span></a></li>';
       const linkHTMLData = {author: articleAuthor};
       const linkHTML = templates.authorLink(linkHTMLData);
       console.log(linkHTML);
@@ -342,9 +325,6 @@ const templates = {
     /* [NEW] START LOOP: for each author in allAuthors: */
     for(let author in allAuthors){
 
-      /* [NEW] generate code of a link and add it to allAuthorsHTML */
-      // allAuthorsHTML += '<li><a href="#author-'+ author + '">' + author + '</a>(' + allAuthors[author] + ')</li>';
-
       allAuthorsData.authors.push({
         author: author,
         count: allAuthors[author],
@@ -359,9 +339,7 @@ const templates = {
 
   generateAuthors();
   
-  // eslint-disable-next-line no-inner-declarations
   function authorClickHandler(event){
-    console.log('Funkcja authorClickHandler uruchomiona!');
 
     /* prevent default action for this event */
     event.preventDefault();
@@ -407,7 +385,7 @@ const templates = {
     generateTitleLinks('[data-author="' + author + '"]');
   }
 
-  // eslint-disable-next-line no-inner-declarations
+  
   function addClickListenersToAuthors(){
 
     /* find all links to author */
